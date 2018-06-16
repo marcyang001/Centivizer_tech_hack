@@ -2,7 +2,7 @@ var express = 	require('express');
 var router 	= 	express.Router();
 var multer	=	require('multer');
 
-var storage	=	multer.diskStorage({
+var storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './public/images');
   },
@@ -10,8 +10,8 @@ var storage	=	multer.diskStorage({
     callback(null, file.originalname);
   }
 });
+var upload = multer({ storage: storage }).single('userPhoto');
 
-var upload = multer({ storage : storage});
 
 
 /* GET form. */
@@ -23,7 +23,16 @@ router.get('/', function(req, res, next) {
 router.post('/generate', function(req, res, next) {
 	
 	
-
+	upload(req,res,function(err) {
+    
+		if(err) {
+			console.log(err);
+			return res.end("Error uploading file.");
+		}
+		console.log ("uploaded a photo");
+		
+		res.end("File is uploaded");
+	});
 
 });
 
