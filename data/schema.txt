@@ -1,0 +1,32 @@
+database name: picinfo
+
+collection 1: pics
+document schema of "pics" collection:
+{
+  imageName: "file_name.jpg",
+  who: "Alice",
+  where: "Paris",
+  year: 1998,
+  month: 7,
+  questions: [
+    { q: "Question 1",
+      rightAnswer: "right answer",
+      wrongAnswers: [
+        "a1",
+	"a2",
+	"a3"
+      ]
+    }
+  ]
+}
+
+collection 2: questionBank
+document schema of "questionBank" collection:
+{
+  imageName: "file_name.jpg",
+  tag: "who",
+  question: "Who is this?",
+  rightAnswer: "Marc"
+}
+The tags that we support now are:
+who, where, year, month, other
