@@ -1,0 +1,7 @@
+$ brew install mongodb
+
+create the database in ./data/db
+
+start mongo daemon
+$ cd <main_project_dir>/data
+$ mongod --dbpath ./db
