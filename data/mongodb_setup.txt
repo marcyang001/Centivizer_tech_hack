@@ -16,15 +16,15 @@ this command creates the database "picinfo"
 
 # this command inserts a document in the collection "pics"
 > db.pics.insertOne(    {
-	filename: "pic1.jpg",
-	people: ["Alice", "Bob", "Cathie", "David", "Ford"],
-	place: "Paris",
+	imageName: "pic1.jpg",
+	who: ["Alice", "Bob", "Cathie", "David", "Ford"],
+	where: "Paris",
 	year: 1954,
 	month: 7,
 	event: "Visit Eiffel Tower",
-	customized_questions: [{
-	    question: "What is your first pet?",
-	    answer: "Steve",
+	questions: [{
+	    q: "What is your first pet?",
+	    rightAnswer: "Steve",
 	    wrongAnswers: ["cat", "snake", "Git"]
 	}]
     });
