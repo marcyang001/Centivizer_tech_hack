@@ -37,6 +37,7 @@ router.post('/generate', function(req, res, next) {
 		var mongoDoc = req.body;
 		mongoDoc['image'] = req.file.originalname;
 
+		
 		console.log(mongoDoc);
 		
 		console.log ("uploaded a photo");
