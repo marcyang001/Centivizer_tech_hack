@@ -33,42 +33,50 @@ router.get('/pics', function(req, res, next){
 function genUserQuestion(questionBase) {
     var userQuestion = Object.assign({}, questionBase);
     var wrongAnswers = [];
-    switch (questionBase.tag) {
-    case "who":
-        const nameBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
-                          "Greg", "Hilbert", "Icelyn", "Jaimie", "Kate", "Lara",
-                          "Mandi", "Nancy", "Odin", "Pascal", "Queeny", "Random",
-                          "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
-                          "Yalgonata", "Zaliki"];
-        for (var i = 0; i < 3; i++) {
-            var j;
-            var cnt = 0;
-            do {
-                j = Math.floor(Math.random() * nameBank.length);
-                cnt++;
-            } while (nameBank[j] === questionBase.rightAnswer && cnt < 26);
-
-            if (nameBank[j] != questionBase.rightAnswer) {
-                wrongAnswers.push(nameBank[j]);
-            } else {
-                wrongAnswers.push("----");
-            }
-        }
-        userQuestion.wrongAnswers = wrongAnswers;
-        break;
-    case "where":
-        break;
-    case "year":
-        break;
-    case "month":
-        break;
-    case "other":
-        break;
-    default:
-        break;
-    }
+    userQuestion.wrongAnswers = genWrongAnswers(questionBase.tag, questionBase.rightAnswer);
     console.log(questionBase);
     return userQuestion;
+}
+
+const nameBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
+                  "Greg", "Hilbert", "Icelyn", "Jaimie", "Kate", "Lara",
+                  "Mandi", "Nancy", "Odin", "Pascal", "Queeny", "Random",
+                  "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
+                  "Yalgonata", "Zaliki"];
+const placeBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
+                  "Greg", "Hilbert", "Icelyn", "Jaimie", "Kate", "Lara",
+                  "Mandi", "Nancy", "Odin", "Pascal", "Queeny", "Random",
+                  "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
+                  "Yalgonata", "Zaliki"];
+var yearBank = [];
+const monthBank = [];
+
+// wrongAnswer_array <- question_tag, right_answer
+function genWrongAnswers(tag, rightAnswer) {
+    var wrongAnswers = [];
+    var dict = null;
+    if (tag === "who") {
+	dict = nameBank;
+    }
+    else if (tag === "where") {
+	dict = placeBank;
+    }
+
+    for (var i = 0; i < 3; i++) {
+        var j;
+        var cnt = 0;
+        do {
+            j = Math.floor(Math.random() * dict.length);
+            cnt++;
+        } while (dict[j] === rightAnswer && cnt < 26);
+
+        if (dict[j] != rightAnswer) {
+            wrongAnswers.push(dict[j]);
+        } else {
+            wrongAnswers.push("----");
+        }
+    }
+    return wrongAnswers;
 }
 
 module.exports = router;
