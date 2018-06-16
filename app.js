@@ -5,11 +5,15 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var mongo = require('mongodb');
+var monk = require('monk');
+
 var index = require('./routes/index');
 var form = require('./routes/form');
 var interact = require('./routes/interact');
 
 var app = express();
+var db = monk('localhost:27017/picinfo');
 
 // view engine setup
 app.use(express.static(__dirname + '/views'));
@@ -22,6 +26,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// put the middleware before all the routers
+// make the database accessible to all the routers
+app.use(function(req, res, next) {
+    req.db = db;
+    next();
+});
 
 app.use('/', index);
 app.use('/form', form);
