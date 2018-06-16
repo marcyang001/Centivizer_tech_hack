@@ -34,11 +34,13 @@ router.post('/generate', function(req, res, next) {
 			return res.end("Error uploading file.");
 		}
 
-		console.log(req.file.originalname);
-		console.log(req.body);
+		var mongoDoc = req.body;
+		mongoDoc['image'] = req.file.originalname;
 
-		console.log ("uploaded a photo");
+		console.log(mongoDoc);
 		
+		console.log ("uploaded a photo");
+		res.status(200);
 		res.end("File is uploaded");
 	});
 
