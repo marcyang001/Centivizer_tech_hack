@@ -2,6 +2,9 @@ var app = angular.module('memory', []);
 app.controller('myCtrl', function($scope, $http) {
     // ng controller initialization
     $scope.loadData = function() {
+	$scope.currentChoice = ''; // radio currentChoice value
+	$scope.isDispFeedback = false;
+	$scope.changedVal = '';	// the state of a radio button
 	$http.get('/interact').then(function(response){
 	    console.log(response.data);
             var questionDisp = response.data;
@@ -14,19 +17,17 @@ app.controller('myCtrl', function($scope, $http) {
         })
     }
     $scope.loadData();
-    $scope.choice='';		// radio choice value
-    $scope.isDispFeedback = false;
 
     // next question button
-    $scope.getNextQuestion = function(choice) {
-	console.log('getNextQuestion');
+    $scope.getNextQuestion = function(currentChoice) {
+	$scope.loadData();
     }
 
-    // radio choices
+    // radio currentChoices
     $scope.getVal = function() {
-	$scope.choice = $scope.changedVal;
-	$scope.isDispFeedback = $scope.choice == '' ? false : true;
-	if ($scope.choice == $scope.rightAnswer) {
+	$scope.currentChoice = $scope.changedVal;
+	$scope.isDispFeedback = $scope.currentChoice == '' ? false : true;
+	if ($scope.currentChoice == $scope.rightAnswer) {
 	    $scope.feedback = "correct";
 	}
 	else {
