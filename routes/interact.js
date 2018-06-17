@@ -104,7 +104,8 @@ function genWrongAnswers(tag, rightAnswer) {
             do {
                 j = rightAnswer - Math.floor(Math.random() * 10);
                 cnt++;
-            } while (j == rightAnswer && cnt < 1000);
+		console.log("i=" + i + ", cnt=" + cnt + ", j=" + j);
+            } while ((j == rightAnswer || findEntry(j, wrongAnswers) == true) && cnt < 1000);
 	    // use == instead of === to compare a number and a number string, e.g. 2 == "2" is true
 
             if (j != rightAnswer) {
@@ -125,9 +126,9 @@ function genWrongAnswers(tag, rightAnswer) {
         var cnt = 0;
         do {
             j = Math.floor(Math.random() * dict.length);
-            console.log("cnt=" + cnt + ", j=" + j);
             cnt++;
-        } while (dict[j] == rightAnswer && cnt < 1000);
+            console.log("i=" + i + ", cnt=" + cnt + ", j=" + j);
+        } while ((dict[j] == rightAnswer || findEntry(dict[j], wrongAnswers) == true) && cnt < 1000);
 	// use == instead of === to compare a number and a number string, e.g. 2 == "2" is true
 
         if (dict[j] != rightAnswer) {
@@ -137,6 +138,18 @@ function genWrongAnswers(tag, rightAnswer) {
         }
     }
     return wrongAnswers;
+}
+
+function findEntry(item, array) {
+    var result = false;
+    for (var i = 0; i < array.length; i++) {
+	if (item == array) {
+	    result = true;
+	    return result;
+	}
+    }
+    console.log(item + ' : ' + array + ' = ' + result);
+    return result;
 }
 
 module.exports = router;
