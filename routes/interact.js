@@ -32,7 +32,6 @@ router.get('/pics', function(req, res, next){
 //           wrongAnswers: ["Alice", "Bob", "Cathie"] }
 function genUserQuestion(questionBase) {
     var userQuestion = Object.assign({}, questionBase);
-    var wrongAnswers = [];
     userQuestion.wrongAnswers = genWrongAnswers(questionBase.tag, questionBase.rightAnswer);
     console.log(questionBase);
     return userQuestion;
@@ -43,11 +42,10 @@ const nameBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
                   "Mandi", "Nancy", "Odin", "Pascal", "Queeny", "Random",
                   "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
                   "Yalgonata", "Zaliki"];
-const placeBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
-                  "Greg", "Hilbert", "Icelyn", "Jaimie", "Kate", "Lara",
-                  "Mandi", "Nancy", "Odin", "Pascal", "Queeny", "Random",
-                  "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
-                  "Yalgonata", "Zaliki"];
+const placeBank = ["Edmonton", "Victoria", "Winnipeg", "Fredericton",
+		   "St. John's", "Halifax", "Toronto", "Charlottetown",
+		   "Quebec City", "Regina", "Yellowknife", "Iqaluit",
+		   "Whitehorse"];
 var yearBank = [];
 const monthBank = [];
 
