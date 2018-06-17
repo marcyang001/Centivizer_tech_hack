@@ -159,7 +159,7 @@ p {
   background-color: rgba(255, 255, 255, 0.85);
 }
 
-.cta .cta-inner:before {
+/* .cta .cta-inner:before {
   border-radius: 0.5rem;
   content: '';
   position: absolute;
@@ -168,7 +168,7 @@ p {
   left: -0.5rem;
   right: -0.5rem;
   border: 0.25rem solid rgba(255, 255, 255, 0.85);
-}
+} */
 
 @media (min-width: 992px) {
   .about-heading .about-heading-img {
