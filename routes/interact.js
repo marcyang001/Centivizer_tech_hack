@@ -3,28 +3,41 @@ var router = express.Router();
 
 /* GET interaction game. */
 router.get('/', function(req, res, next) {
-    res.send('respond with interaction');
-    res.status(200);
+    var db = req.db;
+    // photo collection
+    var picCollection = 'pics';
+    var questionCollection = 'questionbank';
+    const collectionPics = db.get(picCollection);
+    const collectionQuestions = db.get(questionCollection);
+
+    collectionPics.count({})
+	.then((num) => {
+            var randNumber = parseInt((Math.random() * num + 1));
+            collectionPics.find({})
+		.then((docs) => {
+		    var selectedImageName = docs[randNumber-1]["imageName"];
+		    collectionQuestions.count({ "imageName": selectedImageName })
+			.then((questionCnt) => {
+			    var qi = parseInt((Math.random() * questionCnt));
+			    collectionQuestions.find({ "imageName": selectedImageName })
+				.then((docsObj) => {
+				    var doc = docsObj[qi];
+				    var questionDisplay = genUserQuestion(doc);
+				    res.json(questionDisplay);
+				    res.status(200);
+				});
+			}).catch((err) => {
+			});
+		}).catch((err) => {
+		    console.log(err);
+		});
+	}).catch((err) => {
+            console.log(err);
+	});
 });
 
 router.get('/pics', function(req, res, next){
-    // var db = req.db;
-    // const picsCollection = db.get('pics');
-    // picsCollection.find({})
-    //  .then(function(docs) {
-    //      console.log(docs);
-    //      res.json(docs);
-    //  });
-    var qb = { imageName: "pic2.jpg", tag: "who", question: "Who is this?",
-               rightAnswer: "Marc" };
-    var qb2 = { imageName: "pic2.jpg", tag: "where", question: "Where is it?",
-		rightAnswer: "Thunder Bay" };
-    var qb3 = { imageName: "pic2.jpg", tag: "year", question: "What year?",
-		rightAnswer: 2000 };
-    var qb4 = { imageName: "pic2.jpg", tag: "month", question: "What month?",
-	       rightAnswer: 12 };
-    var wa = genUserQuestion(qb4);
-    res.json(wa);
+    res.status(200);
 });
 
 // Generate a question for the Web app front end to use
@@ -49,9 +62,9 @@ const nameBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
                   "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
                   "Yalgonata", "Zaliki"];
 const placeBank = ["Edmonton", "Victoria", "Winnipeg", "Fredericton",
-		   "St. John's", "Halifax", "Toronto", "Charlottetown",
-		   "Quebec City", "Regina", "Yellowknife", "Iqaluit",
-		   "Whitehorse"];
+                   "St. John's", "Halifax", "Toronto", "Charlottetown",
+                   "Quebec City", "Regina", "Yellowknife", "Iqaluit",
+                   "Whitehorse"];
 var yearBank = [];
 const monthBank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
@@ -60,34 +73,34 @@ function genWrongAnswers(tag, rightAnswer) {
     var wrongAnswers = [];
     var dict = null;
     if (tag === "who") {
-	dict = nameBank;
+        dict = nameBank;
     }
     else if (tag === "where") {
-	dict = placeBank;
+        dict = placeBank;
     }
     else if (tag === "month") {
-	dict = monthBank;
+        dict = monthBank;
     }
     else if (tag === "year") {
-	for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 3; i++) {
             var j;
             var cnt = 0;
             do {
-		j = rightAnswer - 25 + Math.floor(Math.random() * 50);
-		cnt++;
+                j = rightAnswer - Math.floor(Math.random() * 10);
+                cnt++;
             } while (j === rightAnswer && cnt < 1000);
 
             if (j != rightAnswer) {
-		wrongAnswers.push(j);
+                wrongAnswers.push(j);
             } else {
-		wrongAnswers.push("----");
+                wrongAnswers.push("----");
             }
-	}
-	return wrongAnswers;
+        }
+        return wrongAnswers;
     }
     else {
-	console.alert("wrong question type");
-	return [];
+        console.log("wrong question type");
+        return [];
     }
 
     for (var i = 0; i < 3; i++) {
@@ -95,7 +108,7 @@ function genWrongAnswers(tag, rightAnswer) {
         var cnt = 0;
         do {
             j = Math.floor(Math.random() * dict.length);
-	    console.log("cnt=" + cnt + ", j=" + j);
+            console.log("cnt=" + cnt + ", j=" + j);
             cnt++;
         } while (dict[j] === rightAnswer && cnt < 1000);
 
