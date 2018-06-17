@@ -16,7 +16,12 @@ app.controller('myCtrl', function($scope, $http) {
 
     $scope.isDisplay = false;
     $scope.getNextQuestion = function(clicked) {
-	alert("clicked");
 	$scope.isDisplay = clicked == true ? false : true;
+    }
+
+    $scope.choice='';
+    $scope.getVal = function() {
+	console.log($scope.changedVal);
+	$scope.choice = $scope.changedVal;
     }
 });
