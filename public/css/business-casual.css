@@ -228,6 +228,10 @@ p {
   color: #e6a756 !important;
 }
 
+.ttle {
+    color: rgba(47, 23, 15, 0.9);
+}
+
 .bg-primary {
   background-color: #e6a756 !important;
 }

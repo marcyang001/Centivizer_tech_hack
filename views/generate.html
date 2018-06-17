@@ -24,7 +24,7 @@
 
   <body>
   <h1 class="site-heading text-center text-white d-none d-lg-block">
-    <span class="site-heading-upper text-primary mb-3">Interact with Memory Tracker</span>
+    <span class="site-heading-upper ttle mb-3">Interact with Memory Tracker</span>
 
   </h1>
     <!-- Navigation -->
@@ -67,9 +67,9 @@
                 action="/form/generate"
                 method="post">
           <ul class="list-unstyled list-hours mb-5 text-left mx-auto">
-          
+
             <li class="list-unstyled-item list-hours-item d-flex">
-              Please upload a photo! 
+              Please upload a photo!
               <div class="ml-auto form-group">
               <input type="file" name="userPhoto" class="form-control-file" id="photo">
             </div>
@@ -99,7 +99,7 @@
                   <input type="number" class="form-control" name="month">
               </div>
             </li>
-            
+
             <li>
               <div style="text-align:center">
 
@@ -143,9 +143,9 @@
             },
 
             success: function(response) {
-              
+
               if (response == "File is uploaded") {
-                
+
                 finalResponse = "<p><strong class=\"alert alert-success\" role=\"alert\">" +  response + "</strong></p>"
 
                 $('#uploadForm').trigger("reset");
@@ -157,12 +157,12 @@
               }
 
               $("#status").html(finalResponse);
-              
+
             }
     });
-        
+
       return false;
-    });    
+    });
   });
   </script>
 
