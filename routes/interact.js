@@ -120,7 +120,7 @@ function genWrongAnswers(tag, rightAnswer) {
         console.log("wrong question type");
         return [];
     }
-
+    // three wrong answers 
     for (var i = 0; i < 3; i++) {
         var j;
         var cnt = 0;
