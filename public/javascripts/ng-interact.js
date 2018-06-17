@@ -1,5 +1,6 @@
 var app = angular.module('memory', []);
 app.controller('myCtrl', function($scope, $http) {
+    // ng controller initialization
     $scope.loadData = function() {
 	$http.get('/interact').then(function(response){
 	    console.log(response.data);
@@ -13,15 +14,23 @@ app.controller('myCtrl', function($scope, $http) {
         })
     }
     $scope.loadData();
+    $scope.choice='';		// radio choice value
+    $scope.isDispFeedback = false;
 
-    $scope.isDisplay = false;
-    $scope.getNextQuestion = function(clicked) {
-	$scope.isDisplay = clicked == true ? false : true;
+    // next question button
+    $scope.getNextQuestion = function(choice) {
+	console.log('getNextQuestion');
     }
 
-    $scope.choice='';
+    // radio choices
     $scope.getVal = function() {
-	console.log($scope.changedVal);
 	$scope.choice = $scope.changedVal;
+	$scope.isDispFeedback = $scope.choice == '' ? false : true;
+	if ($scope.choice == $scope.rightAnswer) {
+	    $scope.feedback = "correct";
+	}
+	else {
+	    $scope.feedback = "wrong";
+	}
     }
 });
