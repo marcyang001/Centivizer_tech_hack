@@ -55,36 +55,37 @@
     </nav>
 
     <section class="page-section about-heading">
-      <div class="container" ng-app="memory">
+      <div class="container" ng-app="memory" ng-controller="myCtrl">
         <div class="about-heading-content">
           <div class="row">
             <div class="col-xl-9 col-lg-10 mx-auto">
               <div class="bg-faded rounded p-5">
-                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/about.jpg" alt="" >
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" ng-src="images/{{imageName}}" alt="" >
                 <p class="section-heading mb-4">
-                  <span class="section-heading-lower">Question: What's your Name?</span>
+                  <span class="section-heading-lower">{{question}}</span>
 		</p>
-		<div ng-app="memory" ng-controller="myCtrl">
+		<div>
 		  <p>
-                    <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" />
-                    <label for="radio-choice-1">{{firstName}}</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-1" ng-model="changedVal" ng-click="getVal()" value="{{answers[0]}}" />
+                    <label for="radio-choice-1">{{answers[0]}}</label>
                   </p>
                   <p>
-                    <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2" />
-                    <label for="radio-choice-2">Amy</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-2" ng-model="changedVal" ng-click="getVal()" value="{{answers[1]}}" />
+                    <label for="radio-choice-2">{{answers[1]}}</label>
                   </p>
                   <p>
-                    <input type="radio" name="radio-choice" id="radio-choice-3" value="choice-3" />
-                    <label for="radio-choice-3">Sally</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-3" ng-model="changedVal" ng-click="getVal()" value="{{answers[2]}}" />
+                    <label for="radio-choice-3">{{answers[2]}}</label>
                   </p>
                   <p>
-                    <input type="radio" name="radio-choice" id="radio-choice-4" value="choice-4" />
-                    <label for="radio-choice-4">John</label>
+                    <input type="radio" name="radio-choice" id="radio-choice-4" ng-model="changedVal" ng-click="getVal()" value="{{answers[3]}}" />
+                    <label for="radio-choice-4">{{answers[3]}}</label>
                   </p>
 
                   <div class="text-center">
-                    <input type="submit" value="Submit" />
+		    <button type="button" ng-click="getNextQuestion(choice)">Next Question</button>
                   </div>
+		  <div class="text-center" ng-show="isDispFeedback">{{feedback}}</div>
 		</div>
               </div>
             </div>
