@@ -30,7 +30,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Start Bootstrap</a>
+        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">MEMORY TRACKER</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -52,17 +52,6 @@
       </div>
     </nav>
 
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-xl-9 mx-auto">
-            <h2 class="section-heading mb-5">
-              <span class="section-heading-upper">Start The Form</span>
-              <span class="section-heading-lower">Answer the questions</span>
-            </h2>
-        </div>
-    </div>
-</div> -->
-
 <section class="page-section cta">
   <div class="container">
     <div class="row">
@@ -72,42 +61,59 @@
             <span class="section-heading-upper">Start The Form</span>
             <span class="section-heading-lower">Answer the questions</span>
           </h2>
+
+
+        <form id="uploadForm"
+                action="/form/generate"
+                method="post">
           <ul class="list-unstyled list-hours mb-5 text-left mx-auto">
+          
+            <li class="list-unstyled-item list-hours-item d-flex">
+              Please upload a photo! 
+              <div class="ml-auto form-group">
+              <input type="file" name="userPhoto" class="form-control-file" id="photo">
+            </div>
+            </li>
+
             <li class="list-unstyled-item list-hours-item d-flex">
               Question 1: Who is in the picture?
               <div class="ml-auto form-group">
-        	    <input type="text" class="form-control" id="answer1">
+        	    <input type="text" class="form-control" name="who">
         	  </div>
             </li>
             <li class="list-unstyled-item list-hours-item d-flex">
               Question 2: Where is the picture taken?
               <div class="ml-auto form-group">
-                  <input type="text" class="form-control" id="answer2">
+                  <input type="text" class="form-control" name="where">
               </div>
             </li>
             <li class="list-unstyled-item list-hours-item d-flex">
-              Question 3: What year and month was the picture taken?
+              Question 3: Which year was the picture taken?
               <div class="ml-auto form-group">
-                  <input type="text" class="form-control" id="answer3">
+                  <input type="number" class="form-control" name="year">
               </div>
             </li>
             <li class="list-unstyled-item list-hours-item d-flex">
-              Question 4: Why was the picture taken?
+              Question 4: Which month was the picture taken?
               <div class="ml-auto form-group">
-                  <input type="text" class="form-control" id="answer4">
+                  <input type="number" class="form-control" name="month">
               </div>
             </li>
+            
             <li>
               <div style="text-align:center">
-              <input type="submit" value="Submit">
+
+                  <input type="submit" class ="btn btn-primary btn-xs active" value="Submit">
+
             </div>
             </li>
           </ul>
+        </form>
           <p class="address mb-5">
             <em>
-              <strong>Thank you for answering</strong>
+              <div id ="thanks"></div>
               <br>
-              Have a great day!
+              <div id = "status"></div>
             </em>
           </p>
         </div>
@@ -122,10 +128,42 @@
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   </body>
-
-  <!-- Script to highlight the active date in the hours list -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
   <script>
-    $('.list-hours li').eq(new Date().getDay()).addClass('today');
+    $(document).ready(function() {
+
+     $('#uploadForm').submit(function() {
+     $("#status").empty().text("Empty submission...");
+
+        $(this).ajaxSubmit({
+
+            error: function(xhr) {
+                status('Error: ' + xhr.status);
+            },
+
+            success: function(response) {
+              
+              if (response == "File is uploaded") {
+                
+                finalResponse = "<p><strong class=\"alert alert-success\" role=\"alert\">" +  response + "</strong></p>"
+
+                $('#uploadForm').trigger("reset");
+                $("#thanks").html("<strong>Thank you for answering </strong>");
+
+              }
+              else {
+                finalResponse = "<p><strong class=\"alert alert-danger\" role=\"alert\">" +  response + "</strong></p>"
+              }
+
+              $("#status").html(finalResponse);
+              
+            }
+    });
+        
+      return false;
+    });    
+  });
   </script>
 
 </html>

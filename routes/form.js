@@ -63,7 +63,7 @@ router.post('/generate', function(req, res, next) {
 			
 			var questionDoc = {};
 
-			if (field !== "questions") {
+			if (field != "questions") {
 				
 				questionDoc["imageName"] = imageInfo["imageName"];
 				questionDoc["tag"] = field;
