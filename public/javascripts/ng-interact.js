@@ -14,7 +14,7 @@ app.controller('myCtrl', function($scope, $http) {
 	    $scope.question = questionDisp.question;
 	    $scope.answers = questionDisp.wrongAnswers;
 	    $scope.answers.push(questionDisp.rightAnswer);
-	    $scope.answers.sort();
+	    shuffle($scope.answers);
 	    $scope.rightAnswer = questionDisp.rightAnswer;
         })
     }
@@ -38,3 +38,15 @@ app.controller('myCtrl', function($scope, $http) {
 	}
     }
 });
+
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
