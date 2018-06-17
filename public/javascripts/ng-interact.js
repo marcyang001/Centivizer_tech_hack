@@ -1,5 +1,7 @@
 var app = angular.module('memory', []);
 app.controller('myCtrl', function($scope, $http) {
+    $scope.currentScore = 0;
+
     // ng controller initialization
     $scope.loadData = function() {
 	$scope.currentChoice = ''; // radio currentChoice value
@@ -29,6 +31,7 @@ app.controller('myCtrl', function($scope, $http) {
 	$scope.isDispFeedback = $scope.currentChoice == '' ? false : true;
 	if ($scope.currentChoice == $scope.rightAnswer) {
 	    $scope.feedback = "correct";
+	    $scope.currentScore++;
 	}
 	else {
 	    $scope.feedback = "wrong";
