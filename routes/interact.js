@@ -17,7 +17,13 @@ router.get('/pics', function(req, res, next){
     //  });
     var qb = { imageName: "pic2.jpg", tag: "who", question: "Who is this?",
                rightAnswer: "Marc" };
-    var wa = genUserQuestion(qb);
+    var qb2 = { imageName: "pic2.jpg", tag: "where", question: "Where is it?",
+		rightAnswer: "Thunder Bay" };
+    var qb3 = { imageName: "pic2.jpg", tag: "year", question: "What year?",
+		rightAnswer: 2000 };
+    var qb4 = { imageName: "pic2.jpg", tag: "month", question: "What month?",
+	       rightAnswer: 12 };
+    var wa = genUserQuestion(qb4);
     res.json(wa);
 });
 
@@ -33,7 +39,7 @@ router.get('/pics', function(req, res, next){
 function genUserQuestion(questionBase) {
     var userQuestion = Object.assign({}, questionBase);
     userQuestion.wrongAnswers = genWrongAnswers(questionBase.tag, questionBase.rightAnswer);
-    console.log(questionBase);
+    // console.log(questionBase);
     return userQuestion;
 }
 
@@ -47,7 +53,7 @@ const placeBank = ["Edmonton", "Victoria", "Winnipeg", "Fredericton",
 		   "Quebec City", "Regina", "Yellowknife", "Iqaluit",
 		   "Whitehorse"];
 var yearBank = [];
-const monthBank = [];
+const monthBank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 // wrongAnswer_array <- question_tag, right_answer
 function genWrongAnswers(tag, rightAnswer) {
@@ -59,19 +65,44 @@ function genWrongAnswers(tag, rightAnswer) {
     else if (tag === "where") {
 	dict = placeBank;
     }
+    else if (tag === "month") {
+	dict = monthBank;
+    }
+    else if (tag === "year") {
+	for (var i = 0; i < 3; i++) {
+            var j;
+            var cnt = 0;
+            do {
+		j = rightAnswer - 25 + Math.floor(Math.random() * 50);
+		cnt++;
+            } while (j === rightAnswer && cnt < 1000);
+
+            if (j != rightAnswer) {
+		wrongAnswers.push(j);
+            } else {
+		wrongAnswers.push("----");
+            }
+	}
+	return wrongAnswers;
+    }
+    else {
+	console.alert("wrong question type");
+	return [];
+    }
 
     for (var i = 0; i < 3; i++) {
         var j;
         var cnt = 0;
         do {
             j = Math.floor(Math.random() * dict.length);
+	    console.log("cnt=" + cnt + ", j=" + j);
             cnt++;
-        } while (dict[j] === rightAnswer && cnt < 26);
+        } while (dict[j] === rightAnswer && cnt < 1000);
 
         if (dict[j] != rightAnswer) {
             wrongAnswers.push(dict[j]);
         } else {
-            wrongAnswers.push("----");
+            wrongAnswers.push("----" + dict[j]);
         }
     }
     return wrongAnswers;
