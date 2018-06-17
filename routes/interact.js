@@ -17,7 +17,13 @@ router.get('/pics', function(req, res, next){
     //  });
     var qb = { imageName: "pic2.jpg", tag: "who", question: "Who is this?",
                rightAnswer: "Marc" };
-    var wa = genUserQuestion(qb);
+    var qb2 = { imageName: "pic2.jpg", tag: "where", question: "Where is it?",
+		rightAnswer: "Thunder Bay" };
+    var qb3 = { imageName: "pic2.jpg", tag: "year", question: "What year?",
+		rightAnswer: 2000 };
+    var qb4 = { imageName: "pic2.jpg", tag: "month", question: "What month?",
+	       rightAnswer: 12 };
+    var wa = genUserQuestion(qb4);
     res.json(wa);
 });
 
@@ -32,43 +38,74 @@ router.get('/pics', function(req, res, next){
 //           wrongAnswers: ["Alice", "Bob", "Cathie"] }
 function genUserQuestion(questionBase) {
     var userQuestion = Object.assign({}, questionBase);
+    userQuestion.wrongAnswers = genWrongAnswers(questionBase.tag, questionBase.rightAnswer);
+    // console.log(questionBase);
+    return userQuestion;
+}
+
+const nameBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
+                  "Greg", "Hilbert", "Icelyn", "Jaimie", "Kate", "Lara",
+                  "Mandi", "Nancy", "Odin", "Pascal", "Queeny", "Random",
+                  "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
+                  "Yalgonata", "Zaliki"];
+const placeBank = ["Edmonton", "Victoria", "Winnipeg", "Fredericton",
+		   "St. John's", "Halifax", "Toronto", "Charlottetown",
+		   "Quebec City", "Regina", "Yellowknife", "Iqaluit",
+		   "Whitehorse"];
+var yearBank = [];
+const monthBank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
+// wrongAnswer_array <- question_tag, right_answer
+function genWrongAnswers(tag, rightAnswer) {
     var wrongAnswers = [];
-    switch (questionBase.tag) {
-    case "who":
-        const nameBank = ["Alice", "Bob", "Cathie", "David", "Edward", "Ford",
-                          "Greg", "Hilbert", "Icelyn", "Jaimie", "Kate", "Lara",
-                          "Mandi", "Nancy", "Odin", "Pascal", "Queeny", "Random",
-                          "Sam", "Tag", "Udele", "Valencia", "Wendelin", "Xyleena",
-                          "Yalgonata", "Zaliki"];
-        for (var i = 0; i < 3; i++) {
+    var dict = null;
+    if (tag === "who") {
+	dict = nameBank;
+    }
+    else if (tag === "where") {
+	dict = placeBank;
+    }
+    else if (tag === "month") {
+	dict = monthBank;
+    }
+    else if (tag === "year") {
+	for (var i = 0; i < 3; i++) {
             var j;
             var cnt = 0;
             do {
-                j = Math.floor(Math.random() * nameBank.length);
-                cnt++;
-            } while (nameBank[j] === questionBase.rightAnswer && cnt < 26);
+		j = rightAnswer - 25 + Math.floor(Math.random() * 50);
+		cnt++;
+            } while (j === rightAnswer && cnt < 1000);
 
-            if (nameBank[j] != questionBase.rightAnswer) {
-                wrongAnswers.push(nameBank[j]);
+            if (j != rightAnswer) {
+		wrongAnswers.push(j);
             } else {
-                wrongAnswers.push("----");
+		wrongAnswers.push("----");
             }
-        }
-        userQuestion.wrongAnswers = wrongAnswers;
-        break;
-    case "where":
-        break;
-    case "year":
-        break;
-    case "month":
-        break;
-    case "other":
-        break;
-    default:
-        break;
+	}
+	return wrongAnswers;
     }
-    console.log(questionBase);
-    return userQuestion;
+    else {
+	console.alert("wrong question type");
+	return [];
+    }
+
+    for (var i = 0; i < 3; i++) {
+        var j;
+        var cnt = 0;
+        do {
+            j = Math.floor(Math.random() * dict.length);
+	    console.log("cnt=" + cnt + ", j=" + j);
+            cnt++;
+        } while (dict[j] === rightAnswer && cnt < 1000);
+
+        if (dict[j] != rightAnswer) {
+            wrongAnswers.push(dict[j]);
+        } else {
+            wrongAnswers.push("----" + dict[j]);
+        }
+    }
+    return wrongAnswers;
 }
 
 module.exports = router;
