@@ -10,6 +10,21 @@ router.get('/', function(req, res, next) {
     const collectionPics = db.get(picCollection);
     const collectionQuestions = db.get(questionCollection);
 
+    // a picture document in the database is like this:
+    // { "_id" : ObjectId("5b25ba1fbd569f641f01421d"),
+    //   "who" : "volvo",
+    //   "month" : "2",
+    //   "where" : "Montreal",
+    //   "year" : "2018",
+    //   "imageName" : "pic2.jpg" }
+
+    // a picture question in the database is like this:
+    // { "_id" : ObjectId("5b25ba1fbd569f641f014221"),
+    //   "imageName" : "pic2.jpg",
+    //   "tag" : "year",
+    //   "question" : "What year is this photo taken?",
+    //   "rightAnswer" : "2018" }
+
     collectionPics.count({})
 	.then((num) => {
             var randNumber = parseInt((Math.random() * num + 1));
@@ -47,7 +62,8 @@ router.get('/pics', function(req, res, next){
 //           rightAnswer: "Marc" }
 // @return: a user question JSON object
 //         e.g.
-//         { imageName: "pic2.jpg", question: "Who is this?", rightAnswer: "Marc",
+//         { imageName: "pic2.jpg", tag: "who", question: "Who is this?",
+//           rightAnswer: "Marc",
 //           wrongAnswers: ["Alice", "Bob", "Cathie"] }
 function genUserQuestion(questionBase) {
     var userQuestion = Object.assign({}, questionBase);
@@ -88,7 +104,8 @@ function genWrongAnswers(tag, rightAnswer) {
             do {
                 j = rightAnswer - Math.floor(Math.random() * 10);
                 cnt++;
-            } while (j === rightAnswer && cnt < 1000);
+            } while (j == rightAnswer && cnt < 1000);
+	    // use == instead of === to compare a number and a number string, e.g. 2 == "2" is true
 
             if (j != rightAnswer) {
                 wrongAnswers.push(j);
@@ -110,7 +127,8 @@ function genWrongAnswers(tag, rightAnswer) {
             j = Math.floor(Math.random() * dict.length);
             console.log("cnt=" + cnt + ", j=" + j);
             cnt++;
-        } while (dict[j] === rightAnswer && cnt < 1000);
+        } while (dict[j] == rightAnswer && cnt < 1000);
+	// use == instead of === to compare a number and a number string, e.g. 2 == "2" is true
 
         if (dict[j] != rightAnswer) {
             wrongAnswers.push(dict[j]);
