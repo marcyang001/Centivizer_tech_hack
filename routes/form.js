@@ -7,8 +7,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 
-
-
 var storage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './public/images');
@@ -43,7 +41,7 @@ router.post('/generate', function(req, res, next) {
 		// append the image field to the document
 		imageInfo["imageName"] = req.file.originalname;
 
-		// picture collection
+		// photo collection
 		var picCollection = 'pics';
 		const collectionPics = db.get(picCollection);
 
