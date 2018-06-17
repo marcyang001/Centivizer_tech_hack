@@ -13,4 +13,10 @@ app.controller('myCtrl', function($scope, $http) {
         })
     }
     $scope.loadData();
+
+    $scope.isDisplay = false;
+    $scope.getNextQuestion = function(clicked) {
+	alert("clicked");
+	$scope.isDisplay = clicked == true ? false : true;
+    }
 });
