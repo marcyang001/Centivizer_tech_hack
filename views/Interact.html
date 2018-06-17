@@ -55,19 +55,19 @@
     </nav>
 
     <section class="page-section about-heading">
-      <div class="container">
+      <div class="container" ng-app="memory">
         <div class="about-heading-content">
           <div class="row">
             <div class="col-xl-9 col-lg-10 mx-auto">
               <div class="bg-faded rounded p-5">
-                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/about.jpg" alt="">
+                <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/about.jpg" alt="" >
                 <p class="section-heading mb-4">
                   <span class="section-heading-lower">Question: What's your Name?</span>
 		</p>
-		<div>
+		<div ng-app="memory" ng-controller="myCtrl">
 		  <p>
                     <input type="radio" name="radio-choice" id="radio-choice-1" value="choice-1" />
-                    <label for="radio-choice-1">Bob</label>
+                    <label for="radio-choice-1">{{firstName}}</label>
                   </p>
                   <p>
                     <input type="radio" name="radio-choice" id="radio-choice-2" value="choice-2" />
@@ -127,4 +127,5 @@
     });
   </script>
 
+  <script src="javascripts/ng-interact.js"></script>
 </html>
