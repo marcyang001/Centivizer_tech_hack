@@ -254,6 +254,12 @@ p {
   font-weight: 100 !important;
 }
 
+.score-font {
+    font-size:2.5rem;
+    color:#FF851B;
+    font-family: Raleway;
+}
+
 #grid {
   display: grid;
   width: 100%;
