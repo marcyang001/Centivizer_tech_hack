@@ -50,3 +50,41 @@ function shuffle(a) {
     }
     return a;
 }
+
+function userInputHandler() {
+    var socket = io('http://192.168.0.100:3000');
+    socket.emit('buttons start', {chatroom: 'buttons'});
+    socket.on('button load', function(msg){
+        console.log(msg.buttonNo);
+        if (msg.buttonNo === '1'){
+            //0 corresponds to first button from right
+            //do something here (ex. move cursor up on the screen, play a video)
+	    console.log(msg.buttonNo);
+        }
+        else if (msg.buttonNo === '2'){
+            //1 corresponds to second button from right
+            //do something else here
+	    console.log(msg.buttonNo);
+        }
+        else if (msg.buttonNo === '3'){
+            //2 corresponds to third button from right
+            //do another thing here
+	    console.log(msg.buttonNo);
+        }
+        else if (msg.buttonNo === '4'){
+            //3 corresponds to forth button from right
+            //do more things here
+	    console.log(msg.buttonNo);
+        }
+        else if (msg.buttonNo === '5'){
+            //4 corresponds to fifth button from right
+            //do more things here
+	    console.log(msg.buttonNo);
+        }
+    });
+    socket.on('button hit', function(msg){
+        //the flashing button was hit, yeeeeeaah
+        //do something here
+        console,log(msg.buttonNo);
+    });
+}
