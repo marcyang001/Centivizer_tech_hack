@@ -1,0 +1,4 @@
+this is a temporary location to store the uploaded photos of the user. 
+
+In the future, all the pictures will be store in the cloud, such as Amazon S3
+
