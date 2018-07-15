@@ -3,7 +3,7 @@ database name: picinfo
 collection 1: pics
 document schema of "pics" collection:
 {
-  imageName: "file_name.jpg",
+  imageUrl: "http://localhost:3000/images/imageName.jpg/",
   who: "Alice",
   where: "Paris",
   year: 1998,
@@ -23,7 +23,7 @@ document schema of "pics" collection:
 collection 2: questionBank
 document schema of "questionBank" collection:
 {
-  imageName: "file_name.jpg",
+  imageUrl: "http://localhost:3000/images/imageName.jpg/",
   tag: "who",
   question: "Who is this?",
   rightAnswer: "Marc"

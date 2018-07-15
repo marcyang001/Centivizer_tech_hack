@@ -7,7 +7,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.use(bodyParser.json());
 
 
-var storage = multer.diskStorage({
+var imageStorage = multer.diskStorage({
   destination: function (req, file, callback) {
     callback(null, './public/images');
   },
@@ -15,8 +15,21 @@ var storage = multer.diskStorage({
     callback(null, file.originalname);
   }
 });
-var upload = multer({ storage: storage }).single("userPhoto");
 
+var csvStorage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, './public/csv');
+  },
+  filename: function (req, file, callback) {
+    callback(null, file.originalname);
+  }
+});
+
+
+
+var uploadImage = multer({ storage: imageStorage }).single("userPhoto");
+
+var uploadCSV = multer({ storage: imageStorage }).single("userPhoto");
 
 
 /* GET form. */
@@ -27,7 +40,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/generate', function(req, res, next) {
 	
-	upload(req,res,function(err) {
+	uploadImage(req,res,function(err) {
 
 		var db = req.db;
 
@@ -38,8 +51,17 @@ router.post('/generate', function(req, res, next) {
 
 		// the information of the photo that user has inputed. 
 		var imageInfo = req.body;
-		// append the image field to the document
-		imageInfo["imageName"] = req.file.originalname;
+
+
+		// http://localhost:3000/images/imageName.jpg/
+		var fullImageUrl = req.protocol + '://' + req.get('host') + "/images/" +req.file.originalname;
+
+		console.log("full image url: " + fullImageUrl);
+
+		// append the image url field to the document
+		imageInfo["imageUrl"] = fullImageUrl;
+
+
 
 		// photo collection
 		var picCollection = 'pics';
@@ -53,7 +75,7 @@ router.post('/generate', function(req, res, next) {
 		// insert the image information into collectionPics collection
 		collectionPics.insert(imageInfo)
 		  .then((docs) => {
-		    console.log("INFO: inserted imageInfo for " + docs["imageName"]);
+		    console.log("INFO: inserted imageInfo for " + docs["imageUrl"]);
 		  }).catch((err) => {
 		    console.log(err);
 		  });
@@ -65,7 +87,7 @@ router.post('/generate', function(req, res, next) {
 
 			if (field != "questions") {
 				
-				questionDoc["imageName"] = imageInfo["imageName"];
+				questionDoc["imageUrl"] = imageInfo["imageUrl"];
 				questionDoc["tag"] = field;
 
 				if (field === "who") {
@@ -83,7 +105,7 @@ router.post('/generate', function(req, res, next) {
 
 					questionDoc["question"] = "What month is this photo taken?";
 				}
-				else if (field === "imageName") {
+				else if (field === "imageUrl") {
 					continue;
 				}
 				
@@ -92,7 +114,7 @@ router.post('/generate', function(req, res, next) {
 				// insert the question doc into the question bank
 				collectionQBank.insert(questionDoc)
 				  .then((docs) => {
-				    console.log("INFO: inserted questionDoc for " + docs["imageName"]);
+				    console.log("INFO: inserted questionDoc for " + docs["imageUrl"]);
 				  }).catch((err) => {
 				    console.log(err);
 				  });
@@ -107,6 +129,24 @@ router.post('/generate', function(req, res, next) {
 		res.status(200);
 		res.end("File is uploaded");
 	});
+
+});
+
+
+router.post('/uploadcsv', function(req, res, next) {
+
+	uploadCSV(req, res, function(err) {
+
+		if(err) {
+			console.log(err);
+			return res.end("Error uploading csv file.");
+		}
+
+
+
+	});
+
+	res.end("enter here!!!\n");
 
 });
 

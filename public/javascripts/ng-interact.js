@@ -10,7 +10,7 @@ app.controller('myCtrl', function($scope, $http) {
 	$http.get('/interact').then(function(response){
 	    console.log(response.data);
             var questionDisp = response.data;
-	    $scope.imageName = questionDisp.imageName;
+	    $scope.imageUrl = questionDisp.imageUrl;
 	    $scope.question = questionDisp.question;
 	    $scope.answers = questionDisp.wrongAnswers;
 	    $scope.answers.push(questionDisp.rightAnswer);
