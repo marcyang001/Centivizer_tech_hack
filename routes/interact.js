@@ -27,28 +27,29 @@ router.get('/', function(req, res, next) {
 
     collectionPics.count({})
 	.then((num) => {
-            var randNumber = parseInt((Math.random() * num + 1));
-            collectionPics.find({})
-		.then((docs) => {
-		    var selectedImageName = docs[randNumber-1]["imageName"];
-		    collectionQuestions.count({ "imageName": selectedImageName })
-			.then((questionCnt) => {
-			    var qi = parseInt((Math.random() * questionCnt));
-			    collectionQuestions.find({ "imageName": selectedImageName })
-				.then((docsObj) => {
-				    var doc = docsObj[qi];
-				    var questionDisplay = genUserQuestion(doc);
-				    res.json(questionDisplay);
-				    res.status(200);
-				});
-			}).catch((err) => {
-			});
+        var randNumber = parseInt((Math.random() * num + 1));
+        collectionPics.find({})
+		    .then((docs) => {
+		          var selectedImageUrl = docs[randNumber-1]["imageUrl"];
+		          collectionQuestions.count({ "imageUrl": selectedImageUrl })
+			     .then((questionCnt) => {
+			        var qi = parseInt((Math.random() * questionCnt));
+			        collectionQuestions.find({ "imageUrl": selectedImageUrl })
+				    .then((docsObj) => {
+				        var doc = docsObj[qi];
+				        var questionDisplay = genUserQuestion(doc);
+				    
+                        res.json(questionDisplay);
+				        res.status(200);
+				    });
+			     }).catch((err) => { 
+                    });
 		}).catch((err) => {
 		    console.log(err);
-		});
+		  });
 	}).catch((err) => {
             console.log(err);
-	});
+	   });
 });
 
 router.get('/pics', function(req, res, next){

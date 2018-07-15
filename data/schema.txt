@@ -9,13 +9,15 @@ document schema of "pics" collection:
   year: 1998,
   month: 7,
   questions: [
-    { q: "Question 1",
+    { 
+      q1: "Question 1",
       rightAnswer: "right answer",
-      wrongAnswers: [
-        "a1",
-	"a2",
-	"a3"
-      ]
+      wrongAnswers: [ "a1", "a2", "a3" ]
+    },
+    { 
+      q2: "Question 2",
+      rightAnswer: "right answer",
+      wrongAnswers: [ "a1", "a2", "a3" ]
     }
   ]
 }

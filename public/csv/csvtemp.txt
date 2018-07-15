@@ -1,0 +1,31 @@
+this is the location where we temporarily store the csv files generate by the user 
+
+the csv files allow the user to upload mulitple contents all in one csv file
+
+After storing the contents of the CSV file in MongoDB, we delete that csv file. 
+
+Here are the headers for the CSV file: 
+
+imageUrl,
+who,
+year,
+month,
+where,
+question1,
+q1_right,
+q1_wrong1,
+q1_wrong2,
+q1_wrong3,
+question2,
+q2_right,
+q2_wrong1,
+q2_wrong2,
+q2_wrong3
+
+...
+
+question##
+q##_right
+q##_wrong1
+q##_wrong2
+q##_wrong3
