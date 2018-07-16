@@ -142,7 +142,6 @@ router.post('/uploadcsv', function(req, res, next) {
     			imageInfo["year"] = csvRow["year"];
     			imageInfo["month"] = csvRow["month"];
 
-    			console.log(csvRow);
 
     			/* TODO for customized questions */ 
     			//								 //
@@ -175,17 +174,17 @@ router.post('/uploadcsv', function(req, res, next) {
 					});
 				});
 		
-
-				console.log ("INFO: uploaded a CSV file");
-				res.status(200);
-				res.end("CSV file is uploaded");
-
     		})
     		.on("end", function(){
-         		console.log("done");
 
          		//delete the uploaded csv file
          		fs.unlinkSync(fileFullPath);
+
+
+         		console.log ("INFO: uploaded a CSV file");
+				res.status(200);
+				res.end("CSV file is uploaded");
+
 
     		});
  		
@@ -193,7 +192,6 @@ router.post('/uploadcsv', function(req, res, next) {
 
 	});
 
-	res.end("enter here!!!\n");
 
 });
 
