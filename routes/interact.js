@@ -14,7 +14,6 @@ router.get('/', function(req, res, next) {
     //       console.log(user.question);
 //
    // })
-    console.log("Qinshihuang");
     //console.log(collectionQuestions.findOne({tag:other}));
     // a picture document in the database is like this:
     // { "_id" : ObjectId("5b25ba1fbd569f641f01421d"),
@@ -42,10 +41,7 @@ router.get('/', function(req, res, next) {
 			        var qi = parseInt((Math.random() * questionCnt));
 			        collectionQuestions.find({ "imageUrl": selectedImageUrl })
 				    .then((docsObj) => {
-				        console.log("DDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-				        console.log(docsObj);
 				        var doc = docsObj[qi];
-                        console.log(doc);
 				        var questionDisplay = genUserQuestion(doc);
 				    
                         res.json(questionDisplay);
@@ -133,7 +129,6 @@ function genWrongAnswers(questionBase) {
         wrongAnswers.push(questionBase.wrongAnswers[0]);
         wrongAnswers.push(questionBase.wrongAnswers[1]);
         wrongAnswers.push(questionBase.wrongAnswers[2]);
-        console.log("NNNNNNNNNNNNNN");
         console.log(wrongAnswers);
         return wrongAnswers;
     }

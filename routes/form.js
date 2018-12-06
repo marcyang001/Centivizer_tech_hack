@@ -113,7 +113,7 @@ router.post('/generate', function(req, res, next) {
 			collectionQBank.insert(questionDoc)
 				.then((docs) => {
 				   console.log("INFO: inserted questionDoc for " + docs["imageUrl"]
-                   +docs["question"]+"Liang");
+                   +docs["question"]);
 				}).catch((err) => {
 				  console.log(err);
 				});
