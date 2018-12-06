@@ -1,0 +1,26 @@
+{
+  "name": "myapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.17.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.6.3",
+    "express": "~4.15.2",
+    "fast-csv": "^2.4.1",
+    "mongodb": "^3.0.10",
+    "monk": "^6.0.6",
+    "morgan": "~1.8.1",
+    "multer": "1.1.0",
+    "pug": "~2.0.0-beta11",
+    "serve-favicon": "~2.4.2"
+  },
+  "devDependencies": {
+    "busboy": "^0.2.14",
+    "nodemon": "^1.17.5"
+  }
+}

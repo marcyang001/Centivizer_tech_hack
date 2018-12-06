@@ -1,0 +1,31 @@
+$ brew install mongodb
+
+create the database in ./data/db
+
+start mongo daemon
+$ cd <main_project_dir>/data
+$ mongod --dbpath ./db
+
+
+start mongodb shell and create a database for test
+$ mongo --host 127.0.0.1:27017
+
+In the mongodb shell,
+this command creates the database "picinfo"
+> use picinfo
+
+# this command inserts a document in the collection "pics"
+> db.pics.insertOne(    {
+	imageName: "pic1.jpg",
+	who: ["Alice", "Bob", "Cathie", "David", "Ford"],
+	where: "Paris",
+	year: 1954,
+	month: 7,
+	event: "Visit Eiffel Tower",
+	questions: [{
+	    q: "What is your first pet?",
+	    rightAnswer: "Steve",
+	    wrongAnswers: ["cat", "snake", "Git"]
+	}]
+    });
+
