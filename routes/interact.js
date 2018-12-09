@@ -42,8 +42,9 @@ router.get('/', function(req, res, next) {
 			        collectionQuestions.find({ "imageUrl": selectedImageUrl })
 				    .then((docsObj) => {
 				        var doc = docsObj[qi];
+
 				        var questionDisplay = genUserQuestion(doc);
-				    
+
                         res.json(questionDisplay);
 				        res.status(200);
 				    });

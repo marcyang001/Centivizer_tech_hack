@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var form = require('./routes/form');
 var interact = require('./routes/interact');
+var  pagEdit= require('./routes/pagEdit');
 
 var mongo = require('mongodb');
 var monk = require('monk');
@@ -39,6 +40,7 @@ app.use(function(req, res, next) {
 app.use('/', index);
 app.use('/form', form);
 app.use('/interact', interact);
+app.use('/pagEdit', pagEdit);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,6 +50,7 @@ app.use(function(req, res, next) {
 });
 
 // error handler
+/*
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
@@ -57,5 +60,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.sendFile(path.join(__dirname, '/views/error.html'));
 });
-
+*/
 module.exports = app;
