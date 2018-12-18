@@ -104,21 +104,25 @@
             </li>
 
             <li >
+              <div class="ml-auto form-group">
               Question 5(Create by yourself):
               <input type="text" class="form-control" name="custom">
+              </div>
               <div class="ml-auto form-group">
                   First fake Answer:<br>
                   <input type="text" name="firstA">
-                  <br>
+              </div>
+              <div class="ml-auto form-group">
                   Second fake Answer:<br>
                   <input type="text" name="secondA">
-                  <br>
+              </div>
+              <div class="ml-auto form-group">
                   Third fake Answer:<br>
                   <input type="text" name="thirdA">
-                  <br>
+              </div>
+              <div class="ml-auto form-group">
                   Right Answer:<br>
-                  <input type="text" name="RightA">
-                <br>
+                <input type="text" name="RightA">
               </div>
             </li>
             <li>
@@ -126,10 +130,20 @@
 
                   <input type="submit" class ="btn btn-primary btn-xs active" value="Submit">
 
+
+                  <a href="pagEdit.html">
+                    <button  type="button" class ="btn btn-primary btn-xs active" ng-click="getVal()">Edit</button>
+                  </a>
+
+
             </div>
+
             </li>
           </ul>
         </form>
+
+
+
           <p class="address mb-5">
             <em>
               <div id ="thanks"></div>

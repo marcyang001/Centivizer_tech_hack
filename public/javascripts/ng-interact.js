@@ -53,11 +53,15 @@ app.controller('myCtrl2', function($scope, $http) {
         $http.get('/pagEdit').then(function(response){
             console.log(response.data);
             var questionDisp = response.data;
-            $scope.imageUrl = questionDisp.imageUrl;
-            $scope.question = questionDisp.question;
-            $scope.answers = questionDisp.wrongAnswers;
-            $scope.answers.push(questionDisp.rightAnswer);
-            console.log("TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT");
+            //$scope.imageUrl = questionDisp[0].imageUrl;
+            $scope.Q1 = questionDisp[0].rightAnswer;
+            $scope.Q2 = questionDisp[1].rightAnswer;
+            $scope.Q3 = questionDisp[2].rightAnswer;
+            $scope.Q4 = questionDisp[3].rightAnswer;
+            $scope.question = questionDisp[4].question;
+            $scope.answers = questionDisp[4].wrongAnswers;
+            $scope.answers.push(questionDisp[4].rightAnswer);
+
             //shuffle($scope.answers);
             $scope.rightAnswer = questionDisp.rightAnswer;
         })

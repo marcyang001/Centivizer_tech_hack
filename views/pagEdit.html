@@ -64,11 +64,47 @@
             <div class="row">
                 <div class="col-xl-9 col-lg-10 mx-auto">
                     <div class="bg-faded rounded p-5">
-                        <!--images/ -->
-                        <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" ng-src="{{imageUrl}}" name="userPhoto"  alt="" >
+
                         <form id="uploadForm2"
                               action="/pagEdit" method="post">
-                            <li >Edit Question 5:
+                            <ul class="list-unstyled list-hours mb-5 text-left mx-auto">
+
+                                <li class="list-unstyled-item list-hours-item d-flex">
+                                    Please upload a photo!
+                                    <div class="ml-auto form-group">
+                                        <input type="file" name="userPhoto" class="form-control-file" id="photo">
+                                    </div>
+                                </li>
+
+                                <li class="list-unstyled-item list-hours-item d-flex">
+                                    Question 1: Who / What is this in the picture?
+                                    <div class="ml-auto form-group">
+                                        <input type="text" class="form-control" name="who" value="{{Q1}}">
+                                    </div>
+                                </li>
+                                <li class="list-unstyled-item list-hours-item d-flex">
+                                    Question 2: Where is the picture taken?
+                                    <div class="ml-auto form-group">
+                                        <input type="text" class="form-control" name="where" value="{{Q2}}">
+                                    </div>
+                                </li>
+                                <li class="list-unstyled-item list-hours-item d-flex">
+                                    Question 3: Which year was the picture taken?
+                                    <div class="ml-auto form-group">
+                                        <input type="number" class="form-control" name="year" value="{{Q3}}">
+                                    </div>
+                                </li>
+                                <li class="list-unstyled-item list-hours-item d-flex">
+                                    Question 4: Which month was the picture taken?
+                                    <div class="ml-auto form-group">
+                                        <input type="number" class="form-control" name="month" value="{{Q4}}">
+                                    </div>
+                                </li>
+
+
+                            <li  >
+
+                                Edit Question 5:
                                 <input type="text" class="form-control" name="custom" value="{{question}}">
                                 <div class="ml-auto form-group">
                                     First fake Answer:<br>
@@ -84,20 +120,29 @@
                                     <input type="text" name="RightAEdit" value="{{answers[3]}}">
                                     <br>
                                 </div>
+
+
                             </li>
                             <li>
                                 <div style="text-align:center">
 
                                     <input type="submit" class ="btn btn-primary btn-xs active" value="Submit">
 
+
+                                    <a href="generate.html">
+                                        <button  type="button" class ="btn btn-primary btn-xs active" ng-click="getVal()">Back to GENERATE!</button>
+                                    </a>
                                 </div>
                             </li>
+                            </ul>
                         </form>
-                        <div class="text-center">
-                            <a href="interact.html">
-                                <button  type="button" ng-click="getVal()">Back to interact!</button>
-                            </a>
-                        </div>
+                        <p class="address mb-5">
+                            <em>
+                                <div id ="thanks"></div>
+                                <br>
+                                <div id = "status"></div>
+                            </em>
+                        </p>
 
 
                     </div>
@@ -126,17 +171,29 @@
     $(document).ready(function() {
 
         $('#uploadForm2').submit(function() {
+            $("#status").empty().text("Empty submission...");
             //$("#status").empty().text("File is uploading...");
 
             $(this).ajaxSubmit({
 
                 error: function(xhr) {
-                    status('Error: ' + xhr.status);
+                    //status('Error: ' + xhr.status);
                 },
 
                 success: function(response) {
-                    console.log(response)
+
+                    if (response == "Edit Succeed!") {
+                    console.log(response);
+                    finalResponse = "<p><strong class=\"alert alert-success\" role=\"alert\">" +  response + "</strong></p>"
+
+
                   //  $("#status").empty().text(response);
+                    }
+                    else {
+                        finalResponse = "<p><strong class=\"alert alert-danger\" role=\"alert\">" +  response + "</strong></p>"
+                    }
+
+                    $("#status").html(finalResponse);
                 }
             });
 
