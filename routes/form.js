@@ -31,7 +31,7 @@ var csvStorage = multer.diskStorage({
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './public/try/')
+    cb(null, './public/vidimg/')
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -74,9 +74,9 @@ router.post('/generate', function(req, res, next) {
 
 		//console.log(req.files);
     //req.file.fileName
-		var fullImageUrl = req.protocol + '://' + req.get('host') + "/try/" +req.files.userPhoto[0].originalname;
+		var fullImageUrl = req.protocol + '://' + req.get('host') + "/vidimg/" +req.files.userPhoto[0].originalname;
 
-		var fullVideoUrl = req.protocol + '://' + req.get('host')+ "/try/" +req.files.userVideo[0].originalname;
+		var fullVideoUrl = req.protocol + '://' + req.get('host')+ "/vidimg/" +req.files.userVideo[0].originalname;
 		//console.log(fullImageUrl);
 		var Info =
             {
@@ -107,7 +107,6 @@ router.post('/generate', function(req, res, next) {
 
 			var listOfQuestions = generateQuestionDocs(Info);
 		//console.log(fullImageUrl+"SSSSSS"+fullVideoUrl);
-		console.log("Succeed for Liang");
 
 		listOfQuestions.map(function(questionDoc) {
 
@@ -273,7 +272,6 @@ router.post('/uploadcsv', function(req, res, next) {
     			imageInfo["questions"] = parseCustomizedQuestionList(csvRow);
     			
 
-    			console.log(imageInfo);
 
     			const collectionPics = db.get(picCollection);
 				const collectionQBank = db.get(questionBankCollection);
@@ -370,11 +368,9 @@ function parseCustomizedQuestionList(csvRow) {
 function generateQuestionDocs(imageInfo) {
 	var resultQuestionDocs = [];
 	// generate questions based on image input (iterate through the keys)
-	console.log(imageInfo);
-	console.log("遇上对的人");
+
 	for (var field in imageInfo) { 
 			
-		console.log(field);
 		if (field != "questions") {
 			
 			var questionDoc = {};
@@ -431,12 +427,10 @@ function generateQuestionDocs(imageInfo) {
 				questionDoc["question"] = customQuestion["question"];
 				questionDoc["rightAnswer"] = customQuestion["rightAnswer"];
 				questionDoc["wrongAnswers"] = customQuestion["wrongAnswer"];
-                console.log(questionDoc);
 				resultQuestionDocs.push(questionDoc);
 			});
 		}
 	} // end of for loop
-	console.log(resultQuestionDocs);
 	return resultQuestionDocs;
 }
 

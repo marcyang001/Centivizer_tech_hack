@@ -53,7 +53,7 @@ router.get('/', function(req, res, next) {
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/try/')
+      cb(null, './public/vidimg/')
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname)
@@ -67,9 +67,9 @@ router.post('/', function(req, res, next){
 
     uploadImage(req,res,function(err) {
 
-        var fullImageUrl = req.protocol + '://' + req.get('host') + "/try/" +req.files.userPhoto[0].originalname;
+        var fullImageUrl = req.protocol + '://' + req.get('host') + "/vidimg/" +req.files.userPhoto[0].originalname;
 
-		var fullVideoUrl = req.protocol + '://' + req.get('host')+ "/try/" +req.files.userVideo[0].originalname;
+		var fullVideoUrl = req.protocol + '://' + req.get('host')+ "/vidimg/" +req.files.userVideo[0].originalname;
 
     console.log(req.body);
     console.log(req.body.firstAEdit);
