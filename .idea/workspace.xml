@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="bb5a9637-870e-4a3d-97d6-c1b4bf4497e1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/javascripts/ng-interact.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/javascripts/ng-interact.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/pagEdit.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/pagEdit.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/Interact.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/Interact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/form.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/views/generate.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/generate.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/pagEdit.html" beforeDir="false" afterPath="$PROJECT_DIR$/views/pagEdit.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,17 +20,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bin/www">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
+            <state relative-caret-position="302">
               <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/interact.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="167" column="55" lean-forward="true" selection-start-line="167" selection-start-column="55" selection-end-line="167" selection-end-column="55" />
+            <state relative-caret-position="1671">
+              <caret line="113" column="16" selection-start-line="113" selection-start-column="16" selection-end-line="113" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -41,7 +38,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/pagEdit.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1634">
+            <state relative-caret-position="1556">
               <caret line="86" selection-start-line="86" selection-end-line="86" />
             </state>
           </provider>
@@ -50,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/ng-interact.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-456">
+            <state relative-caret-position="302">
               <caret line="63" selection-start-line="63" selection-end-line="63" />
             </state>
           </provider>
@@ -59,8 +56,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/pagEdit.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3287">
+            <state relative-caret-position="302">
               <caret line="173" column="61" selection-start-line="173" selection-start-column="61" selection-end-line="173" selection-end-column="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routes/form.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1938">
+              <caret line="247" column="46" lean-forward="true" selection-start-line="247" selection-start-column="46" selection-end-line="247" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -68,11 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/generate.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3667">
-              <caret line="193" column="6" selection-start-line="193" selection-start-column="6" selection-end-line="193" selection-end-column="6" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#li#6;n#ul#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="1520">
+              <caret line="80" selection-start-line="80" selection-end-line="85" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -103,11 +106,11 @@
         <option value="$PROJECT_DIR$/routes/interact.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/views/Interact.html" />
-        <option value="$PROJECT_DIR$/views/generate.html" />
-        <option value="$PROJECT_DIR$/routes/form.js" />
         <option value="$PROJECT_DIR$/views/pagEdit.html" />
         <option value="$PROJECT_DIR$/routes/pagEdit.js" />
         <option value="$PROJECT_DIR$/public/javascripts/ng-interact.js" />
+        <option value="$PROJECT_DIR$/views/generate.html" />
+        <option value="$PROJECT_DIR$/routes/form.js" />
       </list>
     </option>
   </component>
@@ -118,8 +121,8 @@
     <auto-save>true</auto-save>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="459" />
-    <option name="y" value="123" />
+    <option name="x" value="354" />
+    <option name="y" value="126" />
     <option name="width" value="1356" />
     <option name="height" value="1008" />
   </component>
@@ -149,18 +152,7 @@
               <item name="Centivizer_tech_hack-master" type="b2602c69:ProjectViewProjectNode" />
               <item name="Centivizer_tech_hack-master" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Centivizer_tech_hack-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Centivizer_tech_hack-master" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="javascripts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Centivizer_tech_hack-master" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Centivizer_tech_hack-master" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
+              <item name="csv" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Centivizer_tech_hack-master" type="b2602c69:ProjectViewProjectNode" />
@@ -227,11 +219,17 @@
       <workItem from="1545154915800" duration="496000" />
       <workItem from="1545162742164" duration="605000" />
       <workItem from="1545163927937" duration="372000" />
+      <workItem from="1545164969696" duration="2348000" />
+      <workItem from="1545189130592" duration="608000" />
+      <workItem from="1545769500834" duration="89000" />
+      <workItem from="1545841616962" duration="599000" />
+      <workItem from="1545871999728" duration="670000" />
+      <workItem from="1545955730105" duration="630000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="88655000" />
+    <option name="totallyTimeSpent" value="93599000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -244,9 +242,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14535345" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14535345" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -260,7 +257,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3285968" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30728242" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30728242" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -371,8 +368,8 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/public/vendor/jquery/jquery.min.map">
-      <provider editor-type-id="sourcemapFileViewerProvider" />
       <provider selected="true" editor-type-id="text-editor" />
+      <provider editor-type-id="sourcemapFileViewerProvider" />
     </entry>
     <entry file="file://$PROJECT_DIR$/public/vendor/jquery/jquery.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -387,13 +384,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="92">
           <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/csv/csvtemp.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-150">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -428,55 +418,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/www">
+    <entry file="file://$PROJECT_DIR$/public/csv/csvtemp.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/pagEdit.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3287">
-          <caret line="173" column="61" selection-start-line="173" selection-start-column="61" selection-end-line="173" selection-end-column="61" />
+        <state relative-caret-position="247">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/views/generate.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3667">
-          <caret line="193" column="6" selection-start-line="193" selection-start-column="6" selection-end-line="193" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#li#6;n#ul#0;n#form#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="1520">
+          <caret line="80" selection-start-line="80" selection-end-line="85" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/form.js">
+    <entry file="file://$PROJECT_DIR$/routes/interact.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3004">
-          <caret line="188" column="51" selection-start-line="188" selection-start-column="51" selection-end-line="188" selection-end-column="51" />
+        <state relative-caret-position="1671">
+          <caret line="113" column="16" selection-start-line="113" selection-start-column="16" selection-end-line="113" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/pagEdit.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1634">
+        <state relative-caret-position="1556">
           <caret line="86" selection-start-line="86" selection-end-line="86" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/ng-interact.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-456">
+        <state relative-caret-position="302">
           <caret line="63" selection-start-line="63" selection-end-line="63" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/interact.js">
+    <entry file="file://$PROJECT_DIR$/bin/www">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="167" column="55" lean-forward="true" selection-start-line="167" selection-start-column="55" selection-end-line="167" selection-end-column="55" />
+        <state relative-caret-position="302">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/pagEdit.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="173" column="61" selection-start-line="173" selection-start-column="61" selection-end-line="173" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1938">
+          <caret line="247" column="46" lean-forward="true" selection-start-line="247" selection-start-column="46" selection-end-line="247" selection-end-column="46" />
         </state>
       </provider>
     </entry>

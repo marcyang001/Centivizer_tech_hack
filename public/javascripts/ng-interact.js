@@ -8,9 +8,11 @@ app.controller('myCtrl', function($scope, $http) {
 	$scope.isDispFeedback = false;
 	$scope.changedVal = '';	// the state of a radio button
 	$http.get('/interact').then(function(response){
-	    console.log(response.data);
+        console.log(response.data);
+        console.log("Gee");
 
             var questionDisp = response.data;
+        $scope.videoUrl = questionDisp.videoUrl;
 	    $scope.imageUrl = questionDisp.imageUrl;
 	    $scope.question = questionDisp.question;
 	    $scope.answers = questionDisp.wrongAnswers;

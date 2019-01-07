@@ -51,24 +51,25 @@ router.get('/', function(req, res, next) {
 
 });
 
-var imageStorage = multer.diskStorage({
-    destination: function (req, file, callback) {
-        callback(null, './public/images');
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/try/')
     },
-    filename: function (req, file, callback) {
-        callback(null, file.originalname);
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
     }
-});
+  })
 
-var uploadImage = multer({ storage: imageStorage }).single("userPhoto");
+var uploadImage = multer({ storage: storage }).fields([{name:"userPhoto"},{name:"userVideo"}]);
 
 
 router.post('/', function(req, res, next){
 
     uploadImage(req,res,function(err) {
 
-        var fullImageUrl = req.protocol + '://' + req.get('host') + "/images/" +req.file.originalname;
+        var fullImageUrl = req.protocol + '://' + req.get('host') + "/try/" +req.files.userPhoto[0].originalname;
 
+		var fullVideoUrl = req.protocol + '://' + req.get('host')+ "/try/" +req.files.userVideo[0].originalname;
 
     console.log(req.body);
     console.log(req.body.firstAEdit);
@@ -77,21 +78,22 @@ router.post('/', function(req, res, next){
     var questionCollection = 'questionbank';
     const collectionPics = db.get(picCollection);
     const collectionQuestions = db.get(questionCollection);
-    collectionQuestions.update({"tag":"year"},{$set:{"rightAnswer":req.body.year,"imageUrl":fullImageUrl}},false,false);
-    collectionQuestions.update({"tag":"who"},{$set:{"rightAnswer":req.body.who,"imageUrl":fullImageUrl}},false,false);
-    collectionQuestions.update({"tag":"where"},{$set:{"rightAnswer":req.body.where,"imageUrl":fullImageUrl}},false,false);
-    collectionQuestions.update({"tag":"month"},{$set:{"rightAnswer":req.body.month,"imageUrl":fullImageUrl}},false,false);
+    collectionQuestions.update({"tag":"year"},{$set:{"rightAnswer":req.body.year,"imageUrl":fullImageUrl,"videoUrl":fullVideoUrl}},false,false);
+    collectionQuestions.update({"tag":"who"},{$set:{"rightAnswer":req.body.who,"imageUrl":fullImageUrl,"videoUrl":fullVideoUrl}},false,false);
+    collectionQuestions.update({"tag":"where"},{$set:{"rightAnswer":req.body.where,"imageUrl":fullImageUrl,"videoUrl":fullVideoUrl}},false,false);
+    collectionQuestions.update({"tag":"month"},{$set:{"rightAnswer":req.body.month,"imageUrl":fullImageUrl,"videoUrl":fullVideoUrl}},false,false);
 
         collectionPics.find({})
             .then((docs) => {
 
                 console.log(docs);
-                collectionPics.update({"imageUrl":docs[0].imageUrl},{$set:{"imageUrl" : fullImageUrl}},false,false)
+                collectionPics.update({"imageUrl":docs[0].imageUrl},{$set:{"imageUrl" : fullImageUrl,"videoUrl":fullVideoUrl}},false,false)
             })
 
     //collectionPics.update({"tag":"all"},{$set:{"imageUrl":fullImageUrl}},false,false);
     var myquery = { tag: "other" };
     var newvalues = {
+        videoUrl:fullVideoUrl,
         rightAnswer: req.body.RightAEdit,
         tag:"other",
         question:req.body.custom,

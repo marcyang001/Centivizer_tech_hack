@@ -29,7 +29,20 @@ var csvStorage = multer.diskStorage({
   }
 });
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/try/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname)
+  }
+})
 
+//var uploadImage = multer({ storage: storage }).fields([{name:"userPhoto"},
+//{name:"userVideo"}]);
+ 
+var justtry= multer({storage:storage})
+var cptry = justtry.fields([{name:"userPhoto"},{name:"userVideo"}]);
 
 var uploadImage = multer({ storage: imageStorage }).single("userPhoto");
 
@@ -52,6 +65,67 @@ router.get('/', function(req, res, next) {
 
 router.post('/generate', function(req, res, next) {
 	
+	cptry(req,res,function(err){
+		var db = req.db;
+		if(err) {
+			console.log(err);
+			return res.end("Error uploading file.");
+		}
+
+		//console.log(req.files);
+    //req.file.fileName
+		var fullImageUrl = req.protocol + '://' + req.get('host') + "/try/" +req.files.userPhoto[0].originalname;
+
+		var fullVideoUrl = req.protocol + '://' + req.get('host')+ "/try/" +req.files.userVideo[0].originalname;
+		//console.log(fullImageUrl);
+		var Info =
+            {
+            videoUrl: fullVideoUrl,
+            imageUrl: fullImageUrl,
+            who: req.body.who,
+            where: req.body.where,
+            year: req.body.year,
+            month: req.body.month,
+            questions:
+                [{
+                    question: req.body.custom,
+                    rightAnswer: req.body.RightA,
+                    wrongAnswer: [ req.body.firstA, req.body.secondA, req.body.thirdA]
+                }]
+            }
+		
+						const collectionPics = db.get(picCollection);
+						const collectionQBank = db.get(questionBankCollection);
+
+
+			collectionPics.insert(Info)
+		  .then((docs) => {
+		    console.log("INFO: inserted Info for " + docs["imageUrl"]+"and"+docs["videoUrl"]);
+		  }).catch((err) => {
+		    console.log(err);
+		  });
+
+			var listOfQuestions = generateQuestionDocs(Info);
+		//console.log(fullImageUrl+"SSSSSS"+fullVideoUrl);
+		console.log("Succeed for Liang");
+
+		listOfQuestions.map(function(questionDoc) {
+
+			// insert the question doc into the question bank
+			collectionQBank.insert(questionDoc)
+				.then((docs) => {
+				   console.log("INFO: inserted questionDoc for " + docs["imageUrl"]
+                   +docs["question"]);
+				}).catch((err) => {
+				  console.log(err);
+				});
+		});
+
+		console.log ("INFO: uploaded a photo and a video");
+		res.status(200);
+		res.end("Files are uploaded");
+	})
+/*
 	uploadImage(req,res,function(err) {
 
 		var db = req.db;
@@ -60,15 +134,21 @@ router.post('/generate', function(req, res, next) {
 			console.log(err);
 			return res.end("Error uploading file.");
 		}
-
+		console.log("CCCDDDCDCDCDCDCDCDCDCDC");
+		console.log(req);
+		console.log(req.body);
+		console.log("CCCDDDCDCDCDCDCDCDCDCDC");
 		// the information of the photo that user has inputed. 
 		//var imageInfo = req.body;
 
 		// http://localhost:3000/images/imageName.jpg/
 		var fullImageUrl = req.protocol + '://' + req.get('host') + "/images/" +req.file.originalname;
 
+		var fullVideoUrl = req.protocol + '://' + req.get('host')+ "/videos/" +req.file.originalname;
+
         var imageInfo =
             {
+            //videoUrl: fullVideoUrl,
             imageUrl: fullImageUrl,
             who: req.body.who,
             where: req.body.where,
@@ -123,7 +203,7 @@ router.post('/generate', function(req, res, next) {
 		console.log ("INFO: uploaded a photo");
 		res.status(200);
 		res.end("File is uploaded");
-	});
+	});*/
 
 });
 
@@ -290,13 +370,16 @@ function parseCustomizedQuestionList(csvRow) {
 function generateQuestionDocs(imageInfo) {
 	var resultQuestionDocs = [];
 	// generate questions based on image input (iterate through the keys)
+	console.log(imageInfo);
+	console.log("遇上对的人");
 	for (var field in imageInfo) { 
 			
-		
+		console.log(field);
 		if (field != "questions") {
 			
 			var questionDoc = {};
-			questionDoc["imageUrl"] = imageInfo["imageUrl"];		
+			questionDoc["imageUrl"] = imageInfo["imageUrl"];	
+			questionDoc["videoUrl"] = imageInfo["videoUrl"];	
 			questionDoc["tag"] = field;
 
 			if (field === "who") {
@@ -317,7 +400,9 @@ function generateQuestionDocs(imageInfo) {
 			else if (field === "imageUrl") {
 				continue;
 			}
-				
+			else if (field === "videoUrl") {
+				continue;
+			}	
 			questionDoc["rightAnswer"] = imageInfo[field];
 
 			resultQuestionDocs.push(questionDoc);
@@ -341,6 +426,7 @@ function generateQuestionDocs(imageInfo) {
 			imageInfo[field].map(function(customQuestion) {
 				var questionDoc = {};
 				questionDoc["imageUrl"] = imageInfo["imageUrl"];
+				questionDoc["videoUrl"] = imageInfo["videoUrl"];
 				questionDoc["tag"] = "other";
 				questionDoc["question"] = customQuestion["question"];
 				questionDoc["rightAnswer"] = customQuestion["rightAnswer"];
@@ -350,7 +436,7 @@ function generateQuestionDocs(imageInfo) {
 			});
 		}
 	} // end of for loop
-
+	console.log(resultQuestionDocs);
 	return resultQuestionDocs;
 }
 

@@ -68,7 +68,7 @@
 
         <form id="uploadForm"
                 action="/form/generate"
-                method="post">
+                method="post" enctype="multipart/form-data">
           <ul class="list-unstyled list-hours mb-5 text-left mx-auto">
 
             <li class="list-unstyled-item list-hours-item d-flex">
@@ -76,6 +76,13 @@
               <div class="ml-auto form-group">
               <input type="file" name="userPhoto" class="form-control-file" id="photo">
             </div>
+            </li>
+
+            <li class="list-unstyled-item list-hours-item d-flex">
+            Please upload a video!
+              <div id="sendBefore">
+                <input id="videoForm" type="file" name="userVideo" multiple= "multiple" />
+              </div>
             </li>
 
             <li class="list-unstyled-item list-hours-item d-flex">
